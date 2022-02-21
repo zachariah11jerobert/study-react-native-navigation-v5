@@ -1,5 +1,5 @@
 import "react-native-gesture-handler";
-import { Button, Text, View } from "react-native";
+import { Button, Text, View, TextInput } from "react-native";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -7,23 +7,31 @@ import { createStackNavigator } from "@react-navigation/stack";
 const Stack = createStackNavigator();
 
 function HomeScreen({ navigation }) {
+  const [name, setName] = React.useState("");
   return (
     <View>
-      <Text>This is a Home Screen</Text>
+      <Text style={{ fontSize: 24 }}>This is a Home Screen</Text>
+      <TextInput
+        style={{ margin: 30, fontSize: 21 }}
+        placeholder="Please Enter your name"
+        value={name}
+        onChangeText={(text) => setName(text)}
+      />
       <Button
         title="Go to Detail"
         onPress={() => {
-          navigation.navigate("DetailScreen");
+          navigation.navigate("DetailScreen", { name });
         }}
       />
     </View>
   );
 }
 
-function DetailScreen({ navigation }) {
+function DetailScreen({ route, navigation }) {
+  const { name } = route.params;
   return (
     <View>
-      <Text>This is a Detail Screen</Text>
+      <Text style={{ fontSize: 24 }}>Welcome {name}</Text>
       <Button
         title="Go to Home"
         onPress={() => {
