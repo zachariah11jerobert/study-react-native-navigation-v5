@@ -56,12 +56,20 @@ export default function App() {
           name="HomeScreen"
           component={HomeScreen}
           options={{
-            headerStyle: {
-              backgroundColor: "tomato",
-            },
+            title: "Home Screen",
           }}
         />
-        <Stack.Screen name="DetailScreen" component={DetailScreen} />
+        <Stack.Screen
+          name="DetailScreen"
+          component={DetailScreen}
+          options={{
+            title: "Detail Screen",
+            headerRight: () => {
+              <Button title={"Done"} onPress={() => alert("Am pressed!")} />;
+            },
+            headerBackTitle: "Back",
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
